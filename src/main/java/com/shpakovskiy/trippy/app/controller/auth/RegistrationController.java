@@ -1,4 +1,4 @@
-package com.shpakovskiy.trippy.app.controller;
+package com.shpakovskiy.trippy.app.controller.auth;
 
 import com.shpakovskiy.trippy.app.entity.User;
 import com.shpakovskiy.trippy.app.entity.UserRole;
@@ -24,7 +24,7 @@ public class RegistrationController extends HttpServlet {
         String password = httpServletRequest.getParameter(Consts.PASSWORD);
         String name = httpServletRequest.getParameter(Consts.NAME);
 
-        System.out.println(email + " " + password + " " + name);
+        System.out.println("Form data: " + email + " " + password + " " + name);
 
         User user = new User
                 .Builder()

@@ -2,7 +2,6 @@ package com.shpakovskiy.trippy.app.service.user;
 
 import com.shpakovskiy.trippy.app.entity.User;
 import com.shpakovskiy.trippy.dao.user.DefaultUserDao;
-import com.shpakovskiy.trippy.dao.user.UserDao;
 
 import java.util.List;
 
@@ -10,25 +9,26 @@ public class DefaultUserService implements UserService {
 
     @Override
     public List<User> getAllUsers() {
-        UserDao userDao = new DefaultUserDao();
-        return userDao.getAllUsers();
+        return new DefaultUserDao().getAllUsers();
     }
 
     @Override
     public List<User> getAllUsers(String email) {
-        UserDao userDao = new DefaultUserDao();
-        return userDao.getAllUsers(email);
+        return new DefaultUserDao().getAllUsers(email);
     }
 
     @Override
     public boolean addUser(User user) {
-        UserDao userDao = new DefaultUserDao();
-        return userDao.addUser(user);
+        return new DefaultUserDao().addUser(user);
     }
 
     @Override
-    public boolean isUserExists(String email) {
-        UserDao userDao = new DefaultUserDao();
-        return userDao.isUserExists(email);
+    public boolean isUserExists(String email, String password) {
+        return new DefaultUserDao().isUserExists(email, password);
+    }
+
+    @Override
+    public User getUser(String email, String password) {
+        return new DefaultUserDao().getUser(email, password);
     }
 }

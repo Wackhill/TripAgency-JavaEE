@@ -9,12 +9,12 @@ public class PasswordHasher {
     public String getHash(String password) {
         MessageDigest digest;
         try {
-            digest = MessageDigest.getInstance("MD5");
+            digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_16));
 
             //FIXME: Ah, no, my eyes are bleeding
             for (int i = 0; i < hash.length; i++) {
-                if (hash[i] <= 32) {
+                if (!((new Character((char) hash[i])).toString().matches("[a-zA-Z0-9]+"))) {
                     hash[i] = 48;
                 }
             }

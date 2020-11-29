@@ -11,20 +11,24 @@ public class CookiesUtil {
         deleteCookies(response, key);
         content = content.replaceAll(" ", "");
         Cookie cookie = new Cookie(key, content);
-        cookie.setMaxAge(60);
+        cookie.setMaxAge(30);
         response.addCookie(cookie);
     }
 
     public String getCookies(HttpServletRequest request, String cookiesName) {
         try {
-            return Arrays.stream(request.getCookies())
-                    .filter(c -> cookiesName.equals(c.getName()))
-                    .map(Cookie::getValue)
-                    .findAny()
-                    .orElse(null);
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null && cookies.length > 0) {
+                return Arrays.stream(cookies)
+                        .filter(c -> cookiesName.equals(c.getName()))
+                        .map(Cookie::getValue)
+                        .findAny()
+                        .orElse(null);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return null;
     }
 

@@ -1,4 +1,9 @@
 <%@ page import="com.shpakovskiy.trippy.utils.Consts" %>
+<%@ page import="com.shpakovskiy.trippy.app.entity.Tour" %>
+<%@ page import="com.shpakovskiy.trippy.app.service.tour.DefaultTourService" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.shpakovskiy.trippy.app.entity.User" %>
+<%@ page import="com.shpakovskiy.trippy.app.entity.UserRole" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,70 +31,8 @@
     <a href="#" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i class="fa fa-map-marker w3-maruser_role_idgin-right"></i>Happy Trip</b></a>
 </div>
 
-<%
-    String showRegisteredUserFeatures = (!((Boolean) request.getAttribute(Consts.IS_USER_REGISTERED_ATTRIBUTE_NAME))) ? "display: none;" : "";
-    //String theSameUser =
-%>
-
 <!-- Header -->
-<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
-    <div style="<%out.print(showRegisteredUserFeatures);%>">
-        <img src="https://www.w3schools.com/w3images/london2.jpg" alt="London"/>
-
-        <div class="w3-display-middle" style="width:65%; <%out.print(showRegisteredUserFeatures);%>">
-            <div class="w3-bar w3-black">
-                <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'SignIn');"><i class="fa fa-sign-in w3-margin-right"></i>SIGN IN</button>
-                <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'SignUp');"><i class="fa fa-id-card w3-margin-right"></i>SIGN UP</button>
-            </div>
-
-            <!-- Tabs -->
-            <form method="POST" action="/sign-in">
-                <div id="SignIn" class="w3-container w3-white w3-padding-16 myLink">
-                    <div class="w3-row-padding" style="margin:0 -16px;">
-                        <div class="w3-half">
-                            <h3>Email</h3>
-                            <input class="w3-input w3-border" type="email" name="email" placeholder="Enter email" required>
-                        </div>
-                        <div class="w3-half">
-                            <h3>Password</h3>
-                            <input class="w3-input w3-border" type="password" name="password" placeholder="Enter password" required>
-                        </div>
-                    </div>
-                    <p><input class="w3-button w3-dark-grey" type="submit" value="Sign in"/></p>
-                    <!-- <p><button class="w3-button w3-dark-grey">Sign in</button></p> -->
-                </div>
-            </form>
-            <form method="POST" action="/sign-up">
-                <div id="SignUp" class="w3-container w3-white w3-padding-16 myLink">
-                    <div class="w3-row-padding" style="margin:0 -16px;">
-                        <div class="w3-half">
-                            <h3>Email</h3>
-                            <label>
-                                <input class="w3-input w3-border" type="email" name="<%out.print(Consts.EMAIL);%>" placeholder="Enter email" required>
-                            </label>
-                        </div>
-                        <div class="w3-half">
-                            <h3>Name</h3>
-                            <label>
-                                <input class="w3-input w3-border" type="text" name="<%out.print(Consts.NAME);%>" placeholder="Enter name" required>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="w3-row-padding" style="margin:0 -16px;">
-                        <div class="w3-half">
-                            <h3>Password</h3>
-                            <label>
-                                <input class="w3-input w3-border" type="password" name="<%out.print(Consts.PASSWORD);%>" placeholder="Enter password" required>
-                            </label>
-                        </div>
-                    </div>
-                    <p><input class="w3-button w3-dark-grey" type="submit" value="Sign up"/></p>
-<%--                    <p><button class="w3-button w3-dark-grey">Sign up</button></p>--%>
-                </div>
-            </form>
-        </div>
-    </div>
-</header>
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px"></header>
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:1100px;">
@@ -97,72 +40,37 @@
     <!-- Good offers -->
     <div class="w3-container w3-margin-top">
         <h3>Good Offers Right Now</h3>
-<%--        <h6>Up to <strong>50%</strong> discount.</h6>--%>
-    </div>
-    <div class="w3-row-padding w3-text-white w3-large">
-        <div class="w3-half w3-margin-bottom">
-            <div class="w3-display-container">
-                <img src="https://www.w3schools.com/w3images/cinqueterre.jpg" alt="Cinque Terre" style="width:100%">
-                <span class="w3-display-bottomleft w3-padding">Cinque Terre</span>
-            </div>
-        </div>
-        <div class="w3-half w3-margin-bottom">
-            <div class="w3-display-container">
-                <img src="https://www.w3schools.com/w3images/cinqueterre.jpg" alt="Cinque Terre" style="width:100%">
-                <span class="w3-display-bottomleft w3-padding">Cinque Terre</span>
-            </div>
-        </div>
-        <div class="w3-half w3-margin-bottom">
-            <div class="w3-display-container">
-                <img src="https://www.w3schools.com/w3images/newyork2.jpg" alt="New York" style="width:100%">
-                <span class="w3-display-bottomleft w3-padding">New York</span>
-            </div>
-        </div>
-        <div class="w3-half w3-margin-bottom">
-            <div class="w3-display-container">
-                <img src="https://www.w3schools.com/w3images/sanfran.jpg" alt="San Francisco" style="width:100%">
-                <span class="w3-display-bottomleft w3-padding">San Francisco</span>
-            </div>
-        </div>
-        <div class="w3-half w3-margin-bottom">
-            <div class="w3-display-container">
-                <img src="https://www.w3schools.com/w3images/pisa.jpg" alt="Pisa" style="width:100%">
-                <span class="w3-display-bottomleft w3-padding">Pisa</span>
-            </div>
-        </div>
-        <div class="w3-half w3-margin-bottom">
-            <div class="w3-display-container">
-                <img src="https://www.w3schools.com/w3images/paris.jpg" alt="Paris" style="width:100%">
-                <span class="w3-display-bottomleft w3-padding">Paris</span>
-            </div>
-        </div>
     </div>
 
-    <!-- Explore Nature -->
-    <div class="w3-container">
-        <h3>Explore Nature</h3>
-        <p>Travel with us and see nature at its finest.</p>
-    </div>
-    <div class="w3-row-padding">
-        <div class="w3-half w3-margin-bottom">
-            <img src="https://www.w3schools.com/w3images/ocean2.jpg" alt="Norway" style="width:100%">
-            <div class="w3-container w3-white">
-                <h3>West Coast, Norway</h3>
-                <p class="w3-opacity">Roundtrip from $79</p>
-                <p>Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                <button class="w3-button w3-margin-bottom">Buy Tickets</button>
-            </div>
-        </div>
-        <div class="w3-half w3-margin-bottom">
-            <img src="https://www.w3schools.com/w3images/mountains2.jpg" alt="Austria" style="width:100%">
-            <div class="w3-container w3-white">
-                <h3>Mountains, Austria</h3>
-                <p class="w3-opacity">One-way from $39</p>
-                <p>Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
-                <button class="w3-button w3-margin-bottom">Buy Tickets</button>
-            </div>
-        </div>
-    </div>
+    <%
+        User currentUser = (User) request.getAttribute(Consts.CURRENT_USER);
+        List<Tour> allTours = (new DefaultTourService()).getAllTours();
+
+        for (int i = 0; i < allTours.size(); i++) {
+            Tour tour = allTours.get(i);
+
+            out.print((i % 2 == 0) ?
+                    "<div class=\"w3-half w3-margin-bottom\" style=\"float: left; width: 49.5%; margin-right: 0.5%;\">" :
+                    "<div class=\"w3-half w3-margin-bottom\" style=\"float: right; width: 49.5%; margin-left: 0.5%;\">");
+
+            out.print("<img src=\"" + tour.getPictureLink() + "\" alt=\"Norway\" style=\"width:100%\">");
+            out.print("<div class=\"w3-container w3-white\">");
+            out.print("<h3>" + tour.getCaption() +"</h3>");
+            out.print("<p class=\"w3-opacity\"> Price: $" + tour.getPriceDollars() + "</p>");
+            out.print("<p>" + tour.getSummary() + "</p>");
+
+            if (currentUser.getRoleId() == UserRole.ADMIN.ordinal() + 1) {
+                out.print("<label>");
+                out.print("<form method=\"GET\" action=\"/edit/" + i + "\">");
+                out.print("<input class=\"w3-button w3-margin-bottom\" type=\"submit\" value=\"Edit\"/>");
+                out.print("</form>");
+                out.print("</label>");
+            } else {
+                out.print("<button class=\"w3-button w3-margin-bottom\">Buy Tickets</button>");
+            }
+            out.print("</div></div>");
+        }
+    %>
 
     <!-- Newsletter -->
     <div class="w3-container">
@@ -197,25 +105,5 @@
         <a class="fa fa-linkedin w3-hover-opacity" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></a>
     </div>
 </footer>
-
-<script>
-    // Tabs
-    function openLink(evt, linkName) {
-        var i, x, tablinks;
-        x = document.getElementsByClassName("myLink");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < x.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-        }
-        document.getElementById(linkName).style.display = "block";
-        evt.currentTarget.className += " w3-red";
-    }
-
-    // Click on the first tablink on load
-    document.getElementsByClassName("tablink")[0].click();
-</script>
 </body>
 </html>

@@ -11,12 +11,17 @@
 
     <servlet>
         <servlet-name>auth</servlet-name>
-        <servlet-class>com.shpakovskiy.trippy.app.controller.AuthController</servlet-class>
+        <servlet-class>com.shpakovskiy.trippy.app.controller.auth.AuthController</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>registration</servlet-name>
-        <servlet-class>com.shpakovskiy.trippy.app.controller.RegistrationController</servlet-class>
+        <servlet-class>com.shpakovskiy.trippy.app.controller.auth.RegistrationController</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>edit</servlet-name>
+        <servlet-class>com.shpakovskiy.trippy.app.controller.managerControllers.EditTourController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -32,6 +37,11 @@
     <servlet-mapping>
         <servlet-name>registration</servlet-name>
         <url-pattern>/sign-up</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>edit</servlet-name>
+        <url-pattern>/edit/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

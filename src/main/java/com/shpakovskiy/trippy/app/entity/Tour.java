@@ -1,12 +1,5 @@
 package com.shpakovskiy.trippy.app.entity;
 
-enum TourType {
-    SHOPPING,
-    EXCURSION,
-    RECREATION,
-    NATURE
-}
-
 public class Tour {
 
     private int id;
@@ -14,8 +7,6 @@ public class Tour {
     private String summary;
     private String address;
     private String priceDollars;
-    private TourType tourType;
-    private int tourTypeId;
     private boolean isAvailable;
     private boolean isHot;
     private int discount;
@@ -41,14 +32,6 @@ public class Tour {
 
     public String getPriceDollars() {
         return priceDollars;
-    }
-
-    public TourType getTourType() {
-        return tourType;
-    }
-
-    public int getTourTypeId() {
-        return tourTypeId;
     }
 
     public boolean isAvailable() {
@@ -96,17 +79,6 @@ public class Tour {
 
         public Builder priceDollars(String priceDollars) {
             newTour.priceDollars = priceDollars;
-            return this;
-        }
-
-        public Builder tourType(TourType tourType) {
-            newTour.tourType = tourType;
-            newTour.tourTypeId = tourType.ordinal() + 1;
-            return this;
-        }
-
-        public Builder tourTypeId(int tourTypeId) {
-            newTour.tourTypeId = tourTypeId;
             return this;
         }
 
